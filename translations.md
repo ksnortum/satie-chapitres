@@ -56,7 +56,7 @@
 * **Ça y est: elle tombe** - That's it: it falls
 
 ### Subtitle
-* **Regrets des Enfermés (Janas et Latude)** - Regrets of the Confined (Janas and Latude)
+* **Regrets des Enfermés** - Regrets of the Confined
 
 #### Musical Terms
 * **Soyez modéré** - Be moderate
@@ -73,6 +73,7 @@
 * **Ils réfléchissent** - They reflect
 * **Jonas dit: Je suis le Latude marin** - Jonas said, I am the sailor Latude
 * **Latude dit: Je suis le Jonas français** - Latude said, I am the French Jonas
+* **Cela sent le renfermé, d'apre eux** - It smells musty, according to them
 * **Il leur semble qu'ils voient le bon vieux soleil** - They seem to see the good old sun
 * **Ils ne pensent qu'à sortir** - They think only of going out
 * **Plusieurs siecles les séparant** - Several centuries separate them

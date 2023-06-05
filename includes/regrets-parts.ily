@@ -14,6 +14,7 @@
 % --- Changes from the score ---
 % ------------------------------
 
+% Bar 20: Beat two, right hand, lower note in chord is ef, not ff
 % Bar 28: Added bass clef 
 % Bar 35: Changed f,4 to f,8 in left hand
 % Bar 37: Change last beat s8 to r8, right hand
@@ -27,6 +28,8 @@ staffDown = \change Staff = "lower"
 
 moveDynamicsA = \tweak X-offset -3 \etc
 
+slurShapeA = \shape #'((0 . -2) (0 . -1) (0 . 0) (0 . 0)) \etc
+
 % --- Put nonmusical text into variables
 textOmbre = "Ils sont assis dans l'ombre" 
 textReflect = "Ils réfléchissent"
@@ -35,6 +38,7 @@ textFrancais = "Latude dit: Je suis le Jonas français"
 textSoleil = "Il leur semble qu'ils voient le bon vieux soleil"
 textSortir = "Ils ne pensent qu'à sortir"
 textPlusieurs = "Plusieurs siecles les séparant"
+textCela = "Cela sent le renfermé, d'apre eux"
 
 % --- Musical text
 modere = "Soyez modéré"
@@ -71,7 +75,7 @@ highVoice = \relative c' {
   e!4 a |
   e8 [ f? e d ] |
   c4 b |
-  a8 ) % \bar "" \break
+  a8 )
   
   \barNumberCheck #17
   s s4 ^\textReflect |
@@ -123,11 +127,11 @@ highVoice = \relative c' {
   <d f! d'>8-. ^\< s <c? ef g>-. s |
   <bf df bf'>8-. s <af cf ef>-. s |
   <fs a! fs'>8-. s \! <e! g! b!>-. s |
-  <fs a! fs'>8-. s <e! g! b!>-. s |
+  <fs a! fs'>8-. s <e g b>-. s |
   <fs a fs'>8-. s <e g b>-. \bar ""
   
   \barNumberCheck #45
-  s8 |
+  s8 ^\textCela |
   s2 * 3 |
   \time 3/4
   s4 s8 \bar ""
@@ -148,7 +152,7 @@ highVoice = \relative c' {
   \clef bass
   <e,! gs cs>8-. r <es as cs!>-. r |
   <e! gs cs>8-. r <es as cs!>-. r |
-  e'8 ( [ ds cs fs ] |
+  e'!8 ( [ ds cs fs ] |
   ds8 [ cs ] b ) r |
   
   \barNumberCheck #60
@@ -160,7 +164,7 @@ highVoice = \relative c' {
   <a c?>8-. s <g! b>-. s |
   <f! a>8-. s <e g>-. s |
   <d f!>8-. s8 s4 |
-  s8 % \bar "" \break
+  s8
   
   \barNumberCheck #67
   g, ^\textSortir \p ( b [ c ] |
@@ -186,7 +190,7 @@ upperMiddle = \relative c'' {
   c4 ( c |
   b?4 b |
   gs4 a |
-  a8 ) % \bar "" \break
+  a8 )
   
   \barNumberCheck #17
   s s4 |
@@ -293,7 +297,7 @@ lowerMiddle = \relative c' {
   g'4 ( fs |
   g4 fs |
   e4 f! |
-  fs8 ) % \bar "" \break
+  fs8 )
   
   \barNumberCheck #17
   \clef bass
@@ -301,7 +305,7 @@ lowerMiddle = \relative c' {
   <f bf>4 <ef af> |
   <f bf>4 <ef af> |
   \time 3/4
-  <f bf>4 <ef af> <f bf!>8 ) s | % \break
+  <f bf>4 <ef af> <f bf!>8 ) s |
   
   \barNumberCheck #21
   \time 2/4
@@ -372,9 +376,9 @@ lowerMiddle = \relative c' {
   s2 |
   
   \barNumberCheck #72
-  <g,! c f>2-.-- |
-  <f a d>2-.-- |
-  <e g c>2-.-- ~ |
+  <g,! c f>2-_ |
+  <f a d>2-_ |
+  <e g c>2-_ ~ |
   q4 s |
 }
 
@@ -389,7 +393,7 @@ lowVoice = \relative c {
   \barNumberCheck #5
   bf4 ( c |
   a4 g ) |
-  bf4 ( c |
+  bf4 \slurShapeA ( c |
   a4 g |
   f4 ef |
   f4 ef |
@@ -402,7 +406,7 @@ lowVoice = \relative c {
   c'4 ( d |
   e4 b |
   d2 |
-  cs8 ) % \bar "" % \break
+  cs8 )
   
   \barNumberCheck #17
   \clef bass
@@ -525,7 +529,7 @@ dynamics = {
   s4 s8 \bar ""
   
   \barNumberCheck #24
-  s8 s4 |
+  s8 \p s4 |
   \time 2/4
   s2 * 3 |
   s8 \bar ""
@@ -584,18 +588,21 @@ dynamics = {
   s8 s -\temps s4 |
   
   \barNumberCheck #67
+  s2 * 4 |
+  s2 |
+  \grace { s8 \ff s s } 
+  
+  \barNumberCheck #72
+  s2 * 4 |
 }
 
 forcebreaks = {
   \partial 8 s8
   s2 * 4 \break\noPageBreak |
-  
-  \barNumberCheck #5
   s2 * 6 \break\noPageBreak |
   s2 * 2 |
-  
-  \barNumberCheck #13
-  s2 * 4 s8\break\noPageBreak s4. |
+  s2 * 4 |
+  s8\break\noPageBreak s4. |
   s2 * 2 |
   \time 3/4
   s2.\break\noPageBreak |
@@ -604,22 +611,28 @@ forcebreaks = {
   \time 3/4
   s4.\break\noPageBreak s4. |
   \time 2/4
-  s2 * 3 s8\pageBreak s4. |
-  s2 * 3 s8\break s4. |
-  s2 * 3 s8\break s4. |
+  s2 * 3 
+  s8\pageBreak s4. |
+  
+  s2 * 3 
+  s8\break s4. |
+  s2 * 3 
+  s8\break s4. |
   s2 * 2 |
   \time 3/4
   s2.\break
   \time 2/4
-  s2 * 5  s4.\break s8 |
+  s2 * 5
+  s4.\break s8 |
   s2 * 3 |
   \time 3/4
   s4.\pageBreak s4. |
+  
   s2 * 6\break |
   s2 * 4\break |
-  s2 * 6 s8\break s4. |
+  s2 * 6 
+  s8\break s4. |
   s2 * 9\pageBreak |
-  %% <-- start here
 }
 
 % -----------------------
@@ -652,7 +665,7 @@ lower = {
 regretsNotes = \score {
   \header {
     title = ##f
-    subtitle = "Regrets des Enfermés (Janas at Latude)"
+    subtitle = "Regrets des Enfermés"
     composer = ##f
   }
   \new PianoStaff <<

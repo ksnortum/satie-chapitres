@@ -19,6 +19,7 @@
 
 \paper {
   system-system-spacing.padding = 2
+  
   last-bottom-spacing = 
     #'((basic-distance . 6)
        (minimum-distance . 4)
@@ -30,6 +31,11 @@
   #(set-paper-size "letter")
   
   print-all-headers = ##t
+  
+  top-margin = 12\mm % default 5
+  bottom-margin = 12\mm % default 6
+  left-margin = 10\mm % default 10
+  right-margin = 10\mm % default 10
   
   % --- Set these to false after all editing is finished
   ragged-bottom = ##f

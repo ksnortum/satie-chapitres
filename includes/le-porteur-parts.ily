@@ -42,30 +42,32 @@ octaveUp = {
   \ottava #1
   \set Staff.ottavation = #"8"
 }
-
 octaveOff = \ottava #0
 
 moveMarkupA = \tweak Y-offset 30 \etc
 moveDynamicA = \tweak X-offset -2.5 \etc
+moveDynamicB = {
+  \once {
+    \override DynamicLineSpanner.outside-staff-priority = ##f
+    \override DynamicLineSpanner.avoid-slur = #'inside
+    \override DynamicLineSpanner.X-offset = -1
+    \override DynamicLineSpanner.Y-offset = 3.5
+  }
+}
 moveTextA = \tweak X-offset -3 \etc
 
+slurShapeA = \shape #'((0 . 0) (0 . 1) (0 . 1) (0 . 0)) \etc
+
 % --- Put nonmusical text into variables
-phraseJambes = "En traînant les jambes"
-textJambes = -\markup { \italic \phraseJambes }
-phraseEchappe = "Il sent que la pierre lui échappe: elle va tomber" 
-textEchappe = _\markup { \phraseEchappe }
-phraseTombe = "Ça y est: elle tombe"
+textJambes = -\markup { \italic "En traînant les jambes" }
+textEchappe = _\markup { "Il sent que la pierre lui échappe: elle va tomber" }
 textTombe = ^\markup { Ça y est: \italic { elle tombe } }
 
 % --- Musical text
-phraseAvecMal = "Avec beaucoup de mal"
-avec_mal = -\markup { \italic \phraseAvecMal }
-phraseAttendez = "Attendez"
-attendez = -\markup { \italic \phraseAttendez }
-phrasePeniblement = "Péniblement et par à coups"
-peniblement = -\markup { \italic \phrasePeniblement }
-phraseArret = "Arrêt"
-arret = -\markup { \italic \phraseArret }
+avec_mal = -\markup { \italic "Avec beaucoup de mal" }
+attendez = -\markup { \normal-text "Attendez" }
+peniblement = -\markup { \italic "Péniblement et par à coups" }
+arret = -\markup { \italic "Arrêt" }
 
 % -------------
 % --- Music ---
@@ -88,11 +90,11 @@ highVoice = \relative c'' {
   
   \barNumberCheck #9
   \tempo 4 = 40
-  g,16 c? a? f g c \pause a _\fermata f |
+  g,16 ( c? a? f g c \pause a _\fermata f |
   g16 c a f \pause g _\fermata c a f |
   g16 f ef f g f ef! f |
   \time 3/4
-  g16 \pause f _\fermata ef f g f ef! f g f \pause ef _\fermata f |
+  g16 \pause f _\fermata ef f g f ef! f g f \pause ef _\fermata f ) |
   
   \barNumberCheck #13
   \time 2/4
@@ -103,7 +105,7 @@ highVoice = \relative c'' {
   
   \barNumberCheck #17
   \time 3/4
-  b16 ( ^\< e cs a \! gs! cs \pause as \fermata fs e ^\f a fs! d ) |
+  b16 \slurShapeA ( ^\< e cs a \! gs! cs! \pause as \fermata fs \moveDynamicB e ^\f a fs! d ) |
   \time 2/4
   \tempo 4 = 120
   s2 |
@@ -419,7 +421,7 @@ lePorteurMidi = \book {
   \bookOutputName "le-porteur-music"
   \score {
     <<
-      \new Staff ="upper" << \upper \dynamics >>
+      \new Staff = "upper" << \upper \dynamics >>
       \new Staff = "lower" << \lower \dynamics >>
     >>
     \midi {}
